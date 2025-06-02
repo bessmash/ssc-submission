@@ -24,7 +24,9 @@ jobs:
       uses: browser-actions/setup-chrome@latest
 
     - name: Run tests with Maven
-      run: mvn clean verify
+      run: 
+        cd AssessmentProject
+        mvn clean verify
 
     - name: Upload Serenity Report
       uses: actions/upload-artifact@v4
