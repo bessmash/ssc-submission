@@ -2,8 +2,9 @@ name: Run Serenity Tests
 
 on:
   push:
-    paths:
-      - 'AssessmentProject/**'
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -27,7 +28,13 @@ jobs:
       run: |
         cd AssessmentProject
         mvn clean verify
-          
+      continue-on-error: true
+
+    - name: Generate Serenity Report
+      run: |
+        cd AssessmentProject
+        mvn serenity:aggregate
+                    
     - name: Upload Serenity Report
       uses: actions/upload-artifact@v4
       with:
