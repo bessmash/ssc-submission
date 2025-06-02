@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>CalculatorTest</groupId>
+    <artifactId>CalculatorTest</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.29.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>5.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-core</artifactId>
+            <version>4.2.30</version>
+        </dependency>
+       <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-junit</artifactId>
+            <version>4.2.30</version>
+        </dependency>
+
+    </dependencies>
+ 
+    <build>
+   
+    	<plugins>
+    		<plugin>
+            	<groupId>net.serenity-bdd.maven.plugins</groupId>
+            	<artifactId>serenity-maven-plugin</artifactId>
+            	<version>4.2.30</version>
+            	<executions>
+           			<execution>
+            			<id>serenity-reports</id>
+            			<phase>serenity-junit</phase>
+            			<goals>
+            				<goal>aggregate</goal>
+            			</goals>
+            		</execution>
+            	</executions>
+            
+    	
+    		</plugin>
+    	</plugins>
+       </build>
+
+
+</project>

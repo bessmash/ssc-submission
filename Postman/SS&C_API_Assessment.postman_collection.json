@@ -1,0 +1,351 @@
+{
+	"info": {
+		"_postman_id": "e5b31540-5487-4623-baf1-b6e033bd0c4c",
+		"name": "SS&C_API_Assessment",
+		"description": "Tests for functional and security aspects of RESTful API based on Parabank endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4905020"
+	},
+	"item": [
+		{
+			"name": "Fake Session Id Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is not 200\", function () {",
+							"    pm.expect(pm.response.code).not.eql(200);",
+							"});",
+							"",
+							"pm.test(\"This test should fail if data is returned\", function () {",
+							"    pm.expect(pm.response.text()).to.not.include(\"CHECKING\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "JSESSIONID=FAKEFAKEFAKEFAKEFAKEFAKEJSESSIONID123",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/customers/12212/accounts",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"customers",
+						"12212",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body contains 'Accounts Overview'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Accounts Overview\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "john",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/login.htm",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"login.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Data Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"First name is John\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.firstName).to.eql(\"John\");",
+							"    pm.collectionVariables.set(\"userId\", jsonData.id);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/login/john/demo",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"login",
+						"john",
+						"demo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Account Balance Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.collectionVariables.set(\"variable_key\", \"variable_value\");",
+							"",
+							"pm.test(\"Body contains 'CHECKING'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"CHECKING\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/customers/{{userId}}/accounts",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"customers",
+						"{{userId}}",
+						"accounts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HTTP Login Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Body contains 'Required'\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Required\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "john",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "demo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://parabank.parasoft.com/parabank/login.htm",
+					"protocol": "http",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"login.htm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SQL Injection in Endpoint Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is not 200\", function () {",
+							"    pm.expect(pm.response.code).to.not.eql(200);",
+							"});",
+							"",
+							"pm.test(\"Response does not contain sensitive data\", function () {",
+							"    pm.expect(pm.response.text()).to.not.include(\"John\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://parabank.parasoft.com/parabank/services/bank/customers/{{userId}}' OR '1'='1",
+					"protocol": "https",
+					"host": [
+						"parabank",
+						"parasoft",
+						"com"
+					],
+					"path": [
+						"parabank",
+						"services",
+						"bank",
+						"customers",
+						"{{userId}}' OR '1'='1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "userIdd",
+			"value": ""
+		},
+		{
+			"key": "variable_key",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}

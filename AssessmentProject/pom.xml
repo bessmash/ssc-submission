@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ssc</groupId>
+  <artifactId>AssessmentProject</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+   
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.16.1</version>
+  </dependency>
+ 
+  <dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.16.1</version>
+    <scope>test</scope>
+  </dependency>
+     
+  <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.13.2</version>
+      <scope>test</scope>
+  </dependency>
+  
+  	<dependency>
+      	<groupId>org.seleniumhq.selenium</groupId>
+      	<artifactId>selenium-java</artifactId>
+      	<version>4.33.0</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>io.github.bonigarcia</groupId>
+    	<artifactId>webdrivermanager</artifactId>
+    	<version>5.9.3</version>
+	</dependency>
+
+	<dependency>
+    	<groupId>org.hamcrest</groupId>
+    	<artifactId>hamcrest</artifactId>
+    	<version>3.0</version>
+    	<scope>test</scope>
+	</dependency>
+	
+ 	<!-- Rest Assured Dependencies -->
+	<dependency>
+    	<groupId>io.rest-assured</groupId>
+    	<artifactId>rest-assured</artifactId>
+    	<version>5.5.0</version>
+    	<scope>test</scope>
+	</dependency>
+	
+	<dependency>
+    	<groupId>io.rest-assured</groupId>
+    	<artifactId>json-schema-validator</artifactId>
+    	<version>5.5.0</version>
+	</dependency>
+
+	<!-- JSON dependency-->
+	<dependency>
+    	<groupId>org.json</groupId>
+    	<artifactId>json</artifactId>
+    	<version>20250107</version>
+	</dependency>
+
+ 	<!-- Needed for creating request body (json objects) from map objects and pojo classes -->
+ 	<dependency>
+    	<groupId>com.fasterxml.jackson.core</groupId>
+    	<artifactId>jackson-databind</artifactId>
+    	<version>2.18.2</version>
+	</dependency>
+	
+	<!-- For creating map object from xml documents and back -->
+	<dependency>
+    	<groupId>com.fasterxml.jackson.dataformat</groupId>
+    	<artifactId>jackson-dataformat-xml</artifactId>
+    	<version>2.18.2</version>
+	</dependency>
+
+ 	<!-- The alternative to Jackson, can create Json objects from java objects and vice-versa -->
+	<dependency>
+    	<groupId>com.google.code.gson</groupId>
+    	<artifactId>gson</artifactId>
+    	<version>2.12.1</version>
+	</dependency>
+
+ 	<!-- JSON Path dependency, separated from rest-assured -->
+	<dependency>
+    	<groupId>com.jayway.jsonpath</groupId>
+    	<artifactId>json-path</artifactId>
+    	<version>2.9.0</version>
+	</dependency>
+
+ 	<!-- For Json Object Assertions -->
+	<dependency>
+    	<groupId>org.skyscreamer</groupId>
+    	<artifactId>jsonassert</artifactId>
+    	<version>2.0-rc1</version>
+    	<scope>test</scope>
+	</dependency>
+	
+	<!-- For Serenity  -->
+	<dependency>
+    	<groupId>net.serenity-bdd</groupId>
+    	<artifactId>serenity-junit</artifactId>
+    	<version>4.2.30</version>
+	</dependency>
+	
+	<dependency>
+    	<groupId>net.serenity-bdd</groupId>
+    	<artifactId>serenity-cucumber</artifactId>
+    	<version>4.2.30</version>
+    	<scope>test</scope>
+	</dependency>
+	
+	<!-- Serenity Rest Assured -->
+	<dependency>
+    	<groupId>net.serenity-bdd</groupId>
+    	<artifactId>serenity-rest-assured</artifactId>
+    	<version>4.2.30</version>
+	</dependency>
+
+	     
+</dependencies>
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>net.serenity-bdd.maven.plugins</groupId>
+            <artifactId>serenity-maven-plugin</artifactId>
+            <version>4.2.30</version>
+    		<executions>
+        		<execution>
+           			<id>serenity-reports</id>
+            		<phase>verify</phase>  <!-- This ensures the report is generated after tests -->
+            		<goals>
+                		<goal>aggregate</goal>
+            		</goals>
+        		</execution>
+    		</executions>
+
+         </plugin>
+
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.0.0-M7</version>
+         </plugin>
+    </plugins>
+</build>
+  
+</project>
