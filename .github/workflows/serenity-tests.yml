@@ -40,3 +40,4 @@ jobs:
       with:
         name: serenity-report
         path: AssessmentProject/target/serenity-reports
+        retention-days: 90
