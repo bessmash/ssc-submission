@@ -2,7 +2,6 @@
 
 ### Overview  
 This repository contains my technical responses and code implementations for the SS&C QA Assessment. Questions included API testing, Selenium automation (Java & JS), Gherkin scenarios, WinAppDriver, and a GitHub Actions pipeline integrated with Serenity for reporting.
-
 The assessment was completed as a mix of written explanations, code projects, and supporting screenshots. Each question has its own section in the PDF submission.
 ---
 
@@ -47,6 +46,7 @@ Run with default values:
 ```bash
 cd AssessmentProject  
 mvn clean verify
+mvn serenity:aggregate
 ```
 
 Run with custom parameters:  
